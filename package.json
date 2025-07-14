@@ -1,5 +1,5 @@
 {
-  "name": "my-turborepo",
+  "name": "motion-playground",
   "private": true,
   "scripts": {
     "build": "turbo run build",
