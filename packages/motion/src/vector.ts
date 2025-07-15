@@ -84,6 +84,40 @@ export class Vector2 {
   }
 
   /**
+   * Project this vector onto another vector
+   * Returns the projection of this vector onto the target vector
+   */
+  projectOnto(target: Vector2): Vector2 {
+    const targetMagnitudeSquared = target.dot(target);
+    if (targetMagnitudeSquared === 0) {
+      return new Vector2(0, 0); // Cannot project onto zero vector
+    }
+    
+    const scalar = this.dot(target) / targetMagnitudeSquared;
+    return target.multiply(scalar);
+  }
+
+  /**
+   * Get the scalar projection of this vector onto another vector
+   * Returns the length of the projection (can be negative)
+   */
+  scalarProjection(target: Vector2): number {
+    const targetMagnitude = target.magnitude();
+    if (targetMagnitude === 0) return 0;
+    
+    return this.dot(target) / targetMagnitude;
+  }
+
+  /**
+   * Get the rejection of this vector from another vector
+   * Returns the component of this vector perpendicular to the target
+   */
+  reject(target: Vector2): Vector2 {
+    const projection = this.projectOnto(target);
+    return this.subtract(projection);
+  }
+
+  /**
    * Create a string representation of this vector
    */
   toString(): string {

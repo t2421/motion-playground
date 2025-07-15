@@ -21,7 +21,7 @@ export default function VectorDotProduct() {
     // Animation state
     let animationId: number;
     const center = new Vector2(400, 250);
-    const baseVector = new Vector2(150, 0);
+    const baseVector = new Vector2(150, 20);
 
     function animate() {
       if (!canvas || !ctx) return;
@@ -53,9 +53,9 @@ export default function VectorDotProduct() {
       const angleRadians = vectorA.angleTo(vectorB);
       const angleDegrees = angleRadians * (180 / Math.PI);
 
-      // Calculate projection of B onto A
-      const projectionScalar = dotProduct / (vectorA.magnitude() * vectorA.magnitude());
-      const projection = vectorA.multiply(projectionScalar);
+      // Calculate projection of B onto A using the new method
+      const projection = vectorB.projectOnto(vectorA);
+      const scalarProjection = vectorB.scalarProjection(vectorA);
 
       // Draw coordinate axes
       ctx.strokeStyle = '#ccc';
@@ -114,17 +114,35 @@ export default function VectorDotProduct() {
         ctx.setLineDash([]);
       }
 
-      // Draw angle arc
+      // Draw angle arc between vectors A and B
       if (Math.abs(angleRadians) > 0.1) {
         const arcRadius = 50;
+        
+        // Get angles of both vectors
+        const angleA = vectorA.angle();
+        const angleB = vectorB.angle();
+        
+        // Determine start and end angles for the arc
+        const startAngle = angleA;
+        let endAngle = angleB;
+        
+        // Ensure we draw the shorter arc
+        let angleDiff = endAngle - startAngle;
+        if (angleDiff > Math.PI) {
+          angleDiff -= 2 * Math.PI;
+        } else if (angleDiff < -Math.PI) {
+          angleDiff += 2 * Math.PI;
+        }
+        endAngle = startAngle + angleDiff;
+        
         ctx.strokeStyle = '#9c27b0';
         ctx.lineWidth = 2;
         ctx.beginPath();
-        ctx.arc(center.x, center.y, arcRadius, 0, angleRadians, angleRadians < 0);
+        ctx.arc(center.x, center.y, arcRadius, startAngle, endAngle, angleDiff < 0);
         ctx.stroke();
 
-        // Angle label
-        const midAngle = angleRadians / 2;
+        // Angle label at the middle of the arc
+        const midAngle = startAngle + angleDiff / 2;
         const labelPos = new Vector2(
           center.x + Math.cos(midAngle) * (arcRadius + 15),
           center.y + Math.sin(midAngle) * (arcRadius + 15)
@@ -140,7 +158,7 @@ export default function VectorDotProduct() {
       const panelX = 20;
       const panelY = 20;
       const panelWidth = 280;
-      const panelHeight = 160;
+      const panelHeight = 180;
 
       // Panel background
       ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
@@ -159,17 +177,18 @@ export default function VectorDotProduct() {
       ctx.fillText(`Vector A: (${vectorA.x.toFixed(1)}, ${vectorA.y.toFixed(1)})`, panelX + 15, panelY + 50);
       ctx.fillText(`Vector B: (${vectorB.x.toFixed(1)}, ${vectorB.y.toFixed(1)})`, panelX + 15, panelY + 70);
       ctx.fillText(`Angle: ${angleDegrees.toFixed(1)}°`, panelX + 15, panelY + 90);
+      ctx.fillText(`Scalar Projection: ${scalarProjection.toFixed(2)}`, panelX + 15, panelY + 110);
       
       ctx.font = 'bold 14px Arial';
       ctx.fillStyle = dotProduct >= 0 ? '#2e7d32' : '#d32f2f';
-      ctx.fillText(`Dot Product: ${dotProduct.toFixed(2)}`, panelX + 15, panelY + 115);
+      ctx.fillText(`Dot Product: ${dotProduct.toFixed(2)}`, panelX + 15, panelY + 130);
       
       ctx.fillStyle = '#666';
       ctx.font = '12px Arial';
       const interpretation = dotProduct > 0 ? 'Vectors point in similar directions' :
                            dotProduct < 0 ? 'Vectors point in opposite directions' :
                            'Vectors are perpendicular';
-      ctx.fillText(interpretation, panelX + 15, panelY + 135);
+      ctx.fillText(interpretation, panelX + 15, panelY + 155);
 
       animationId = requestAnimationFrame(animate);
     }
