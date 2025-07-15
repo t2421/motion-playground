@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { Vector2 } from '@t2421/motion';
+import { CanvasUtil, Vector2 } from '@t2421/motion';
 
 export default function VectorBasics() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -34,20 +34,11 @@ export default function VectorBasics() {
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Draw grid
-      ctx.strokeStyle = '#e9ecef';
-      ctx.lineWidth = 1;
-      for (let x = 0; x < canvas.width; x += 20) {
-        ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, canvas.height);
-        ctx.stroke();
-      }
-      for (let y = 0; y < canvas.height; y += 20) {
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(canvas.width, y);
-        ctx.stroke();
-      }
+      CanvasUtil.drawGrid(canvas, { 
+        interval: 10, 
+        color: '#e9ecef', 
+        lineWidth: 1 
+      });
 
       // Calculate result vector
       vectors.result = vectors.a.add(vectors.b);
@@ -131,31 +122,6 @@ export default function VectorBasics() {
           ref={canvasRef}
           style={{ display: 'block', width: '100%', height: 'auto' }}
         />
-      </div>
-
-      <div style={{ backgroundColor: '#f8f9fa', padding: '1.5rem', borderRadius: '8px' }}>
-        <h3>Code Example</h3>
-        <pre style={{ 
-          backgroundColor: '#fff', 
-          padding: '1rem', 
-          borderRadius: '4px',
-          overflow: 'auto',
-          fontSize: '0.9rem'
-        }}>
-{`import { Vector2 } from '@t2421/motion';
-
-// Create vectors
-const vectorA = new Vector2(100, 200);
-const vectorB = new Vector2(200, 100);
-
-// Add vectors
-const result = vectorA.add(vectorB);
-
-// Other operations
-const magnitude = vectorA.magnitude();
-const normalized = vectorA.normalize();
-const distance = vectorA.distance(vectorB);`}
-        </pre>
       </div>
     </div>
   );
