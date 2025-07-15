@@ -44,9 +44,24 @@ export default function VectorBasics() {
       vectors.result = vectors.a.add(vectors.b);
 
       // Draw vectors
-      drawVector(ctx, new Vector2(0, 0), vectors.a, '#ff6b6b', 'Vector A');
-      drawVector(ctx, vectors.a, vectors.b, '#4ecdc4', 'Vector B');
-      drawVector(ctx, new Vector2(0, 0), vectors.result, '#45b7d1', 'Result (A + B)');
+      CanvasUtil.drawVector(ctx, new Vector2(0, 0), vectors.a, { 
+        color: '#ff6b6b', 
+        lineWidth: 3,
+        label: 'Vector A',
+        labelOffset: new Vector2(10, -15)
+      });
+      CanvasUtil.drawVector(ctx, vectors.a, vectors.b, { 
+        color: '#4ecdc4', 
+        lineWidth: 3,
+        label: 'Vector B',
+        labelOffset: new Vector2(15, 0)
+      });
+      CanvasUtil.drawVector(ctx, new Vector2(0, 0), vectors.result, { 
+        color: '#45b7d1', 
+        lineWidth: 2,
+        label: 'Result (A + B)',
+        labelOffset: new Vector2(10, -15)
+      });
 
       // Update vectors for animation
       const time = Date.now() * 0.001;
@@ -56,39 +71,6 @@ export default function VectorBasics() {
       vectors.b.y = 100 + Math.sin(time * 0.8) * 35;
 
       animationId = requestAnimationFrame(animate);
-    }
-
-    function drawVector(ctx: CanvasRenderingContext2D, start: Vector2, end: Vector2, color: string, label: string) {
-      const endPos = start.add(end);
-      
-      // Draw line
-      ctx.strokeStyle = color;
-      ctx.lineWidth = 3;
-      ctx.beginPath();
-      ctx.moveTo(start.x, start.y);
-      ctx.lineTo(endPos.x, endPos.y);
-      ctx.stroke();
-
-      // Draw arrow head
-      const angle = Math.atan2(end.y, end.x);
-      const headLength = 15;
-      ctx.beginPath();
-      ctx.moveTo(endPos.x, endPos.y);
-      ctx.lineTo(
-        endPos.x - headLength * Math.cos(angle - Math.PI / 6),
-        endPos.y - headLength * Math.sin(angle - Math.PI / 6)
-      );
-      ctx.moveTo(endPos.x, endPos.y);
-      ctx.lineTo(
-        endPos.x - headLength * Math.cos(angle + Math.PI / 6),
-        endPos.y - headLength * Math.sin(angle + Math.PI / 6)
-      );
-      ctx.stroke();
-
-      // Draw label
-      ctx.fillStyle = color;
-      ctx.font = '14px Arial';
-      ctx.fillText(label, endPos.x + 10, endPos.y - 10);
     }
 
     animate();

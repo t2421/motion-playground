@@ -3,7 +3,7 @@ export { Vector2 } from "./vector.js";
 export { BezierCurve, EasingFunctions } from "./bezier.js";
 export { Shape, Circle, Rectangle, Triangle } from "./shapes.js";
 export { MotionUtil } from "./motion.js";
-export { CanvasUtil, type GridOptions } from "./utils/canvas.js";
+export { CanvasUtil, type GridOptions, type VectorDrawOptions } from "./utils/canvas.js";
 
 // Version and package info
 export const VERSION = "0.1.0";

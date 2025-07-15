@@ -1,7 +1,17 @@
+import { Vector2 } from "../vector.js";
+
 export interface GridOptions {
   interval?: number;
   color?: string;
   lineWidth?: number;
+}
+
+export interface VectorDrawOptions {
+  color?: string;
+  lineWidth?: number;
+  arrowHeadLength?: number;
+  label?: string;
+  labelOffset?: Vector2;
 }
 
 export class CanvasUtil {
@@ -27,5 +37,53 @@ export class CanvasUtil {
         ctx.lineTo(canvas.width, y);
         ctx.stroke();
       }
+    }
+
+    static drawVector(
+        ctx: CanvasRenderingContext2D,
+        start: Vector2,
+        end: Vector2,
+        options: VectorDrawOptions = {}
+    ) {
+        const { 
+            color = '#333', 
+            lineWidth = 3, 
+            arrowHeadLength = 15, 
+            label,
+            labelOffset = new Vector2(10, -10)
+        } = options;
+        
+        const endPos = start.add(end);
+        
+        // Draw line
+        ctx.strokeStyle = color;
+        ctx.lineWidth = lineWidth;
+        ctx.beginPath();
+        ctx.moveTo(start.x, start.y);
+        ctx.lineTo(endPos.x, endPos.y);
+        ctx.stroke();
+
+        // Draw arrow head
+        const angle = Math.atan2(end.y, end.x);
+        ctx.beginPath();
+        ctx.moveTo(endPos.x, endPos.y);
+        ctx.lineTo(
+            endPos.x - arrowHeadLength * Math.cos(angle - Math.PI / 6),
+            endPos.y - arrowHeadLength * Math.sin(angle - Math.PI / 6)
+        );
+        ctx.moveTo(endPos.x, endPos.y);
+        ctx.lineTo(
+            endPos.x - arrowHeadLength * Math.cos(angle + Math.PI / 6),
+            endPos.y - arrowHeadLength * Math.sin(angle + Math.PI / 6)
+        );
+        ctx.stroke();
+
+        // Draw label if provided
+        if (label) {
+            ctx.fillStyle = color;
+            ctx.font = '14px Arial';
+            const labelPos = endPos.add(labelOffset);
+            ctx.fillText(label, labelPos.x, labelPos.y);
         }
+    }
 }
