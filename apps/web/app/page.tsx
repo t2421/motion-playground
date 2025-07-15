@@ -1,5 +1,5 @@
 import Image, { type ImageProps } from "next/image";
-import { Button } from "@repo/ui/button";
+import { Vector2, Circle, Motion, BezierCurve, EasingFunctions } from "@repo/motion";
 import styles from "./page.module.css";
 
 type Props = Omit<ImageProps, "src"> & {
@@ -19,6 +19,48 @@ const ThemeImage = (props: Props) => {
 };
 
 export default function Home() {
+  // Motion package demonstration
+  console.log("=== Motion Package Demo ===");
+  
+  // Vector calculations
+  const position = new Vector2(10, 20);
+  const velocity = new Vector2(5, 3);
+  const newPosition = position.add(velocity);
+  console.log("Original position:", position.toString());
+  console.log("Velocity:", velocity.toString());
+  console.log("New position:", newPosition.toString());
+  console.log("Distance moved:", position.distance(newPosition));
+  
+  // Shape creation
+  const circle = new Circle(5, position);
+  console.log("Circle:", circle.toString());
+  console.log("Circle area:", circle.getArea());
+  console.log("Circle perimeter:", circle.getPerimeter());
+  
+  // Motion utilities
+  const lerpValue = Motion.lerp(0, 100, 0.5);
+  const clampedValue = Motion.clamp(150, 0, 100);
+  const mappedValue = Motion.map(50, 0, 100, 0, 1);
+  console.log("Lerp 50%:", lerpValue);
+  console.log("Clamped 150 to [0,100]:", clampedValue);
+  console.log("Mapped 50 from [0,100] to [0,1]:", mappedValue);
+  
+  // Bezier curve
+  const curve = new BezierCurve(
+    { x: 0, y: 0 },
+    { x: 25, y: 100 },
+    { x: 75, y: 100 },
+    { x: 100, y: 0 }
+  );
+  const midPoint = curve.getPoint(0.5);
+  console.log("Bezier curve midpoint:", midPoint);
+  
+  // Easing function example
+  const easePoint = EasingFunctions.easeInOut.getPoint(0.5);
+  console.log("EaseInOut at t=0.5:", easePoint);
+  
+  console.log("=== End Motion Demo ===");
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -63,9 +105,6 @@ export default function Home() {
             Read our docs
           </a>
         </div>
-        <Button appName="web" className={styles.secondary}>
-          Open alert
-        </Button>
       </main>
       <footer className={styles.footer}>
         <a
