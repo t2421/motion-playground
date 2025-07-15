@@ -17,14 +17,6 @@ export const samples: Sample[] = [
     category: 'vector'
   },
   {
-    id: 'bouncing-ball',
-    title: 'Bouncing Ball',
-    description: 'Physics simulation with vector calculations',
-    thumbnail: '/thumbnails/bouncing-ball.svg',
-    path: '/samples/bouncing-ball',
-    category: 'vector'
-  },
-  {
     id: 'animated-shapes',
     title: 'Animated Shapes',
     description: 'Circle, Rectangle, Triangle animations',
