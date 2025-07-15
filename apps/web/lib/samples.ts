@@ -63,6 +63,22 @@ export const samples: Sample[] = [
     thumbnail: '/thumbnails/vector-cross-product.svg',
     path: '/samples/vector-cross-product',
     category: 'vector'
+  },
+  {
+    id: 'vector-lerp',
+    title: 'Vector Lerp',
+    description: 'Linear interpolation between vectors for smooth animations',
+    thumbnail: '/thumbnails/vector-lerp.svg',
+    path: '/samples/vector-lerp',
+    category: 'vector'
+  },
+  {
+    id: 'vector-reflect',
+    title: 'Vector Reflection',
+    description: 'Vector reflection across surfaces and collision response',
+    thumbnail: '/thumbnails/vector-reflect.svg',
+    path: '/samples/vector-reflect',
+    category: 'vector'
   }
 ];
 

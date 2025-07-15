@@ -1,0 +1,56 @@
+<svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="300" height="200" fill="#f8f9fa"/>
+  
+  <!-- Grid -->
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e9ecef" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="300" height="200" fill="url(#grid)"/>
+  
+  <!-- Path line -->
+  <line x1="50" y1="80" x2="250" y2="120" stroke="#ddd" stroke-width="2" stroke-dasharray="4,4"/>
+  
+  <!-- Start point -->
+  <circle cx="50" cy="80" r="6" fill="#333"/>
+  <text x="50" y="70" text-anchor="middle" font-family="Arial" font-size="12" fill="#333">Start</text>
+  
+  <!-- End point -->
+  <circle cx="250" cy="120" r="6" fill="#333"/>
+  <text x="250" y="110" text-anchor="middle" font-family="Arial" font-size="12" fill="#333">End</text>
+  
+  <!-- Lerp points with different t values -->
+  <circle cx="100" cy="90" r="4" fill="#ff6b6b"/>
+  <text x="100" y="105" text-anchor="middle" font-family="Arial" font-size="10" fill="#ff6b6b">t=0.25</text>
+  
+  <circle cx="150" cy="100" r="4" fill="#4ecdc4"/>
+  <text x="150" y="115" text-anchor="middle" font-family="Arial" font-size="10" fill="#4ecdc4">t=0.5</text>
+  
+  <circle cx="200" cy="110" r="4" fill="#45b7d1"/>
+  <text x="200" y="125" text-anchor="middle" font-family="Arial" font-size="10" fill="#45b7d1">t=0.75</text>
+  
+  <!-- Animated lerp point (larger) -->
+  <circle cx="175" cy="105" r="8" fill="#e91e63" stroke="#fff" stroke-width="2"/>
+  
+  <!-- Vector arrow from start to animated point -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+     refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#e91e63"/>
+    </marker>
+  </defs>
+  <line x1="50" y1="80" x2="175" y2="105" stroke="#e91e63" stroke-width="3" marker-end="url(#arrowhead)"/>
+  
+  <!-- Color gradient demonstration -->
+  <rect x="20" y="140" width="40" height="20" fill="#ff6b6b"/>
+  <rect x="70" y="140" width="40" height="20" fill="#8b4cb8"/>
+  <rect x="120" y="140" width="40" height="20" fill="#4ecdc4"/>
+  
+  <text x="80" y="175" text-anchor="middle" font-family="Arial" font-size="11" fill="#666">Color Lerp</text>
+  
+  <!-- Title -->
+  <text x="150" y="25" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="#333">Vector Lerp</text>
+  <text x="150" y="40" text-anchor="middle" font-family="Arial" font-size="12" fill="#666">Linear Interpolation</text>
+</svg>
