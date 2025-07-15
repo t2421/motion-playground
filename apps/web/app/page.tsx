@@ -1,5 +1,5 @@
 import Image, { type ImageProps } from "next/image";
-import { Vector2, Circle, MotionUtil, BezierCurve, EasingFunctions } from "@repo/motion";
+import { Vector2, Circle, MotionUtil, BezierCurve, EasingFunctions } from "@t2421/motion";
 import styles from "./page.module.css";
 
 type Props = Omit<ImageProps, "src"> & {

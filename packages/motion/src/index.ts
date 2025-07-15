@@ -6,7 +6,7 @@ export { MotionUtil } from "./motion.js";
 
 // Version and package info
 export const VERSION = "0.1.0";
-export const PACKAGE_NAME = "@repo/motion";
+export const PACKAGE_NAME = "@t2421/motion";
 
 /**
  * Motion Package - A comprehensive animation and vector calculation library
@@ -19,7 +19,7 @@ export const PACKAGE_NAME = "@repo/motion";
  * 
  * Example usage:
  * ```typescript
- * import { Vector2, Circle, MotionUtil } from "@repo/motion";
+ * import { Vector2, Circle, MotionUtil } from "@t2421/motion";
  * 
  * const position = new Vector2(10, 20);
  * const circle = new Circle(5, position);

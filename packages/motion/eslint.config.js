@@ -1,4 +1,4 @@
-import { base, restrictEnvAccess } from "@repo/eslint-config/base";
+import { base, restrictEnvAccess } from "@t2421/eslint-config/base";
 
 export default [
   {

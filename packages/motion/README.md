@@ -1,4 +1,4 @@
-# @repo/motion
+# @t2421/motion
 
 A comprehensive animation and vector calculation library for motion graphics and animations.
 
@@ -12,7 +12,7 @@ A comprehensive animation and vector calculation library for motion graphics and
 ## Usage
 
 ```typescript
-import { Vector2, Circle, MotionUtil, BezierCurve, EasingFunctions } from "@repo/motion";
+import { Vector2, Circle, MotionUtil, BezierCurve, EasingFunctions } from "@t2421/motion";
 
 // Vector calculations
 const position = new Vector2(10, 20);

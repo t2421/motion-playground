@@ -1,5 +1,5 @@
 {
-  "name": "@repo/motion",
+  "name": "@t2421/motion",
   "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",
@@ -18,8 +18,8 @@
     "check-types": "tsc --noEmit"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
+    "@t2421/eslint-config": "workspace:*",
+    "@t2421/typescript-config": "workspace:*",
     "eslint": "^9.30.0",
     "typescript": "5.8.2"
   },
