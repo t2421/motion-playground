@@ -1,5 +1,5 @@
 import Image, { type ImageProps } from "next/image";
-import { Vector2, Circle, Motion, BezierCurve, EasingFunctions } from "@repo/motion";
+import { Vector2, Circle, MotionUtil, BezierCurve, EasingFunctions } from "@repo/motion";
 import styles from "./page.module.css";
 
 type Props = Omit<ImageProps, "src"> & {
@@ -38,9 +38,9 @@ export default function Home() {
   console.log("Circle perimeter:", circle.getPerimeter());
   
   // Motion utilities
-  const lerpValue = Motion.lerp(0, 100, 0.5);
-  const clampedValue = Motion.clamp(150, 0, 100);
-  const mappedValue = Motion.map(50, 0, 100, 0, 1);
+  const lerpValue = MotionUtil.lerp(0, 100, 0.5);
+  const clampedValue = MotionUtil.clamp(150, 0, 100);
+  const mappedValue = MotionUtil.map(50, 0, 100, 0, 1);
   console.log("Lerp 50%:", lerpValue);
   console.log("Clamped 150 to [0,100]:", clampedValue);
   console.log("Mapped 50 from [0,100] to [0,1]:", mappedValue);

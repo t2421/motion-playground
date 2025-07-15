@@ -1,7 +1,7 @@
 /**
  * Motion utility functions
  */
-export class Motion {
+export class MotionUtil {
   /**
    * Linear interpolation between two values
    */

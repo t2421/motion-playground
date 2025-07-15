@@ -12,7 +12,7 @@ A comprehensive animation and vector calculation library for motion graphics and
 ## Usage
 
 ```typescript
-import { Vector2, Circle, Motion, BezierCurve, EasingFunctions } from "@repo/motion";
+import { Vector2, Circle, MotionUtil, BezierCurve, EasingFunctions } from "@repo/motion";
 
 // Vector calculations
 const position = new Vector2(10, 20);
@@ -24,8 +24,8 @@ const circle = new Circle(5, position);
 console.log(circle.getArea()); // π * 5²
 
 // Motion utilities
-const lerped = Motion.lerp(0, 100, 0.5); // 50
-const clamped = Motion.clamp(150, 0, 100); // 100
+const lerped = MotionUtil.lerp(0, 100, 0.5); // 50
+const clamped = MotionUtil.clamp(150, 0, 100); // 100
 
 // Bezier curves
 const curve = new BezierCurve(
@@ -52,7 +52,7 @@ const point = curve.getPoint(0.5); // Middle point of the curve
 - `Rectangle(width, height, position)` - Rectangle shape
 - `Triangle(base, height, position)` - Triangle shape
 
-### Motion
+### MotionUtil
 - `lerp(start, end, t)` - Linear interpolation
 - `clamp(value, min, max)` - Clamp value to range
 - `map(value, fromMin, fromMax, toMin, toMax)` - Map value between ranges
