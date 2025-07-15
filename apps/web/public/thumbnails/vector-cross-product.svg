@@ -1,0 +1,52 @@
+<svg width="200" height="120" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="200" height="120" fill="#f8f9fa"/>
+  
+  <!-- Grid -->
+  <defs>
+    <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+      <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#e9ecef" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="200" height="120" fill="url(#grid)"/>
+  
+  <!-- Center point -->
+  <circle cx="100" cy="60" r="2" fill="#666"/>
+  
+  <!-- Vector A -->
+  <defs>
+    <marker id="arrowhead-a" markerWidth="8" markerHeight="6" 
+            refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0 0, 8 3, 0 6" fill="#ff6b6b"/>
+    </marker>
+  </defs>
+  <line x1="100" y1="60" x2="160" y2="60" stroke="#ff6b6b" stroke-width="3" marker-end="url(#arrowhead-a)"/>
+  <text x="165" y="55" font-family="Arial, sans-serif" font-size="12" fill="#ff6b6b" font-weight="bold">A</text>
+  
+  <!-- Vector B -->
+  <defs>
+    <marker id="arrowhead-b" markerWidth="8" markerHeight="6" 
+            refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0 0, 8 3, 0 6" fill="#4ecdc4"/>
+    </marker>
+  </defs>
+  <line x1="100" y1="60" x2="130" y2="25" stroke="#4ecdc4" stroke-width="3" marker-end="url(#arrowhead-b)"/>
+  <text x="135" y="20" font-family="Arial, sans-serif" font-size="12" fill="#4ecdc4" font-weight="bold">B</text>
+  
+  <!-- Parallelogram -->
+  <path d="M 100 60 L 160 60 L 190 25 L 130 25 Z" 
+        fill="rgba(156, 39, 176, 0.15)" 
+        stroke="#9c27b0" 
+        stroke-width="2" 
+        stroke-dasharray="4,3"/>
+  
+  <!-- Area label -->
+  <text x="145" y="45" font-family="Arial, sans-serif" font-size="11" fill="#9c27b0" font-weight="bold">Area</text>
+  
+  <!-- Rotation indicator -->
+  <text x="40" y="30" font-family="Arial, sans-serif" font-size="20" fill="#2e7d32">↻</text>
+  <text x="25" y="45" font-family="Arial, sans-serif" font-size="8" fill="#2e7d32">CCW</text>
+  
+  <!-- Cross product symbol -->
+  <text x="15" y="100" font-family="Arial, sans-serif" font-size="14" fill="#333" font-weight="bold">A × B</text>
+</svg>

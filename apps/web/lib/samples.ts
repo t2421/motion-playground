@@ -63,6 +63,14 @@ export const samples: Sample[] = [
     thumbnail: '/thumbnails/vector-dot-product.svg',
     path: '/samples/vector-dot-product',
     category: 'vector'
+  },
+  {
+    id: 'vector-cross-product',
+    title: 'Vector Cross Product',
+    description: 'Cross product, area calculation, and rotation direction',
+    thumbnail: '/thumbnails/vector-cross-product.svg',
+    path: '/samples/vector-cross-product',
+    category: 'vector'
   }
 ];
 
