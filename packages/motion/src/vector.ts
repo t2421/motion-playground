@@ -52,6 +52,38 @@ export class Vector2 {
   }
 
   /**
+   * Calculate the dot product of this vector and another
+   */
+  dot(vector: Vector2): number {
+    return this.x * vector.x + this.y * vector.y;
+  }
+
+  /**
+   * Calculate the cross product of this vector and another
+   * In 2D, this returns a scalar (the z-component of the 3D cross product)
+   */
+  cross(vector: Vector2): number {
+    return this.x * vector.y - this.y * vector.x;
+  }
+
+  /**
+   * Get the angle between this vector and another in radians
+   */
+  angleTo(vector: Vector2): number {
+    const dotProduct = this.dot(vector);
+    const magnitudes = this.magnitude() * vector.magnitude();
+    if (magnitudes === 0) return 0;
+    return Math.acos(Math.max(-1, Math.min(1, dotProduct / magnitudes)));
+  }
+
+  /**
+   * Get the angle of this vector in radians (from positive x-axis)
+   */
+  angle(): number {
+    return Math.atan2(this.y, this.x);
+  }
+
+  /**
    * Create a string representation of this vector
    */
   toString(): string {
