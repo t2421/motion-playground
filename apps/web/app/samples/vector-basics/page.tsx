@@ -63,6 +63,7 @@ export default function VectorBasics() {
         labelOffset: new Vector2(10, -15)
       });
 
+
       // Update vectors for animation
       const time = Date.now() * 0.001;
       vectors.a.x = 100 + Math.sin(time) * 50;
@@ -90,7 +91,7 @@ export default function VectorBasics() {
         </Link>
         <h1 style={{ marginTop: '1rem', marginBottom: '0.5rem' }}>Vector Basics</h1>
         <p style={{ color: '#666' }}>
-          Basic vector operations: addition, subtraction, and normalization
+          Basic vector operations: addition, subtraction, normalization, dot product, cross product, and angle calculations
         </p>
       </header>
 
@@ -105,6 +106,7 @@ export default function VectorBasics() {
           style={{ display: 'block', width: '100%', height: 'auto' }}
         />
       </div>
+
     </div>
   );
 }

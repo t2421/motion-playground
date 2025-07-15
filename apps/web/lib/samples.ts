@@ -55,6 +55,14 @@ export const samples: Sample[] = [
     thumbnail: '/thumbnails/motion-utils.svg',
     path: '/samples/motion-utils',
     category: 'utils'
+  },
+  {
+    id: 'vector-dot-product',
+    title: 'Vector Dot Product',
+    description: 'Interactive dot product visualization and projection',
+    thumbnail: '/thumbnails/vector-dot-product.svg',
+    path: '/samples/vector-dot-product',
+    category: 'vector'
   }
 ];
 
