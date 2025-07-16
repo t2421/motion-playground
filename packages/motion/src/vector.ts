@@ -337,4 +337,24 @@ export class Vector2 {
   static fromObject(obj: { x: number, y: number }): Vector2 {
     return new Vector2(obj.x, obj.y);
   }
+
+  /**
+   * Get the direction (unit vector) from this vector to another vector
+   * @param target The target vector to get direction to
+   * @returns Unit vector pointing from this vector to the target, or zero vector if they are the same
+   */
+  directionTo(target: Vector2): Vector2 {
+    const direction = target.subtract(this);
+    return direction.isZero() ? Vector2.zero() : direction.normalize();
+  }
+
+  /**
+   * Get the direction (unit vector) from another vector to this vector
+   * @param source The source vector to get direction from
+   * @returns Unit vector pointing from the source vector to this vector, or zero vector if they are the same
+   */
+  directionFrom(source: Vector2): Vector2 {
+    const direction = this.subtract(source);
+    return direction.isZero() ? Vector2.zero() : direction.normalize();
+  }
 }

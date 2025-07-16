@@ -1,4 +1,5 @@
 import { Vector2 } from "../vector.js";
+import { Dot } from "../dot.js";
 
 export interface GridOptions {
   interval?: number;
@@ -85,5 +86,83 @@ export class CanvasUtil {
             const labelPos = endPos.add(labelOffset);
             ctx.fillText(label, labelPos.x, labelPos.y);
         }
+    }
+
+    static drawDot(
+        ctx: CanvasRenderingContext2D,
+        position: Vector2,
+        options: VectorDrawOptions = {}
+    ) {
+        const { 
+            color = '#333', 
+            lineWidth = 3 
+        } = options;
+        
+        // Draw dot
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.arc(position.x, position.y, lineWidth * 2, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    static drawParticle(
+        ctx: CanvasRenderingContext2D,
+        dot: Dot,
+        options: {
+            showVelocity?: boolean;
+            showAcceleration?: boolean;
+            velocityScale?: number;
+            accelerationScale?: number;
+            showTrail?: boolean;
+        } = {}
+    ) {
+        const { 
+            showVelocity = false, 
+            showAcceleration = false,
+            velocityScale = 1,
+            accelerationScale = 10,
+            showTrail = false
+        } = options;
+
+        // Draw the dot
+        ctx.fillStyle = dot.color;
+        ctx.beginPath();
+        ctx.arc(dot.position.x, dot.position.y, dot.radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Draw velocity vector
+        if (showVelocity && !dot.velocity.isZero()) {
+            this.drawVector(ctx, dot.position, dot.velocity.multiply(velocityScale), {
+                color: '#4ecdc4',
+                lineWidth: 2,
+                label: 'v',
+                labelOffset: new Vector2(5, -5)
+            });
+        }
+
+        // Draw acceleration vector
+        if (showAcceleration && !dot.acceleration.isZero()) {
+            this.drawVector(ctx, dot.position, dot.acceleration.multiply(accelerationScale), {
+                color: '#ff6b6b',
+                lineWidth: 2,
+                label: 'a',
+                labelOffset: new Vector2(5, 5)
+            });
+        }
+    }
+
+    static drawParticles(
+        ctx: CanvasRenderingContext2D,
+        dots: Dot[],
+        options: {
+            showVelocity?: boolean;
+            showAcceleration?: boolean;
+            velocityScale?: number;
+            accelerationScale?: number;
+        } = {}
+    ) {
+        dots.forEach(dot => {
+            this.drawParticle(ctx, dot, options);
+        });
     }
 }

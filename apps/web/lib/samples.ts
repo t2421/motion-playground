@@ -4,7 +4,7 @@ export interface Sample {
   description: string;
   thumbnail: string;
   path: string;
-  category: 'vector' | 'shapes' | 'bezier' | 'utils';
+  category: 'vector' | 'shapes' | 'bezier' | 'utils' | 'physics';
 }
 
 export const samples: Sample[] = [
@@ -15,6 +15,14 @@ export const samples: Sample[] = [
     thumbnail: '/thumbnails/vector-basics.svg',
     path: '/samples/vector-basics',
     category: 'vector'
+  },
+  {
+    id: 'dot-basic',
+    title: 'Dot Physics',
+    description: 'Interactive dots with position, velocity, and acceleration',
+    thumbnail: '/thumbnails/dot-basic.svg',
+    path: '/samples/dot-basic',
+    category: 'physics'
   },
   {
     id: 'animated-shapes',
@@ -84,6 +92,7 @@ export const samples: Sample[] = [
 
 export const categories = {
   vector: 'Vector Calculations',
+  physics: 'Physics & Particles',
   shapes: 'Geometric Shapes',
   bezier: 'Bezier & Easing',
   utils: 'Utility Functions'
