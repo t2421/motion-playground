@@ -25,6 +25,14 @@ export const samples: Sample[] = [
     category: 'physics'
   },
   {
+    id: 'dot-repulsive',
+    title: 'Dot Repulsive Force',
+    description: 'Dots flee from the mouse cursor using repulsive forces',
+    thumbnail: '/thumbnails/dot-repulsive.svg',
+    path: '/samples/dot-repulsive',
+    category: 'physics'
+  },
+  {
     id: 'animated-shapes',
     title: 'Animated Shapes',
     description: 'Circle, Rectangle, Triangle animations',
