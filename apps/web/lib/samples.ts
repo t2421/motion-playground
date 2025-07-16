@@ -33,6 +33,14 @@ export const samples: Sample[] = [
     category: 'physics'
   },
   {
+    id: 'dot-wind',
+    title: 'Dot Wind Force',
+    description: 'Dots affected by wind forces',
+    thumbnail: '/thumbnails/dot-wind.svg',
+    path: '/samples/dot-wind',
+    category: 'physics'
+  },
+  {
     id: 'animated-shapes',
     title: 'Animated Shapes',
     description: 'Circle, Rectangle, Triangle animations',
