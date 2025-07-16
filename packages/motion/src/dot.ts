@@ -1,4 +1,5 @@
 import { Vector2 } from './vector.js';
+import { PerlinNoise } from './noise.js';
 
 /**
  * A dot (particle) with position, velocity, and acceleration
@@ -13,6 +14,10 @@ export class Dot {
   public color: string;
   public maxSpeed: number;
   public friction: number;
+  
+  // Noise-related properties
+  private noiseOffset: Vector2;
+  private static globalNoise: PerlinNoise = new PerlinNoise();
 
   constructor(options: {
     position?: Vector2;
@@ -32,6 +37,9 @@ export class Dot {
     this.color = options.color || '#333';
     this.maxSpeed = options.maxSpeed || Infinity;
     this.friction = options.friction || 0;
+    
+    // Initialize noise offset with random values for each dot
+    this.noiseOffset = new Vector2(Math.random() * 1000, Math.random() * 1000);
   }
 
   // ==================== Physics Update ====================
@@ -101,6 +109,35 @@ export class Dot {
     const desired = this.position.subtract(target).normalize().multiply(this.maxSpeed);
     const steer = desired.subtract(this.velocity).limit(maxForce);
     this.applyForce(steer);
+  }
+
+  /**
+   * Apply Perlin noise-based force for organic movement
+   * @param strength Strength of the noise force
+   * @param scale Scale of the noise (smaller = smoother movement)
+   * @param time Current time for animation
+   */
+  applyNoiseForce(strength: number = 0.5, scale: number = 0.01, time: number = 0): void {
+    // Use position and time to create smooth, evolving noise
+    const noiseX = Dot.globalNoise.octaveNoise2D(
+      (this.position.x + this.noiseOffset.x) * scale,
+      time * scale * 0.5,
+      4,
+      0.5,
+      1
+    );
+    
+    const noiseY = Dot.globalNoise.octaveNoise2D(
+      (this.position.y + this.noiseOffset.y) * scale,
+      time * scale * 0.5 + 1000, // Offset to make Y independent of X
+      4,
+      0.5,
+      1
+    );
+    
+    // Convert noise (-1 to 1) to force vector
+    const noiseForce = new Vector2(noiseX, noiseY).multiply(strength);
+    this.applyForce(noiseForce);
   }
 
   /**
@@ -248,7 +285,7 @@ export class Dot {
    * Create a copy of this dot
    */
   clone(): Dot {
-    return new Dot({
+    const cloned = new Dot({
       position: this.position.clone(),
       velocity: this.velocity.clone(),
       acceleration: this.acceleration.clone(),
@@ -258,6 +295,10 @@ export class Dot {
       maxSpeed: this.maxSpeed,
       friction: this.friction
     });
+    
+    // Copy noise offset as well
+    cloned.noiseOffset = this.noiseOffset.clone();
+    return cloned;
   }
 
   /**

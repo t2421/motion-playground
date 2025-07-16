@@ -10,6 +10,9 @@ export default function DotRepulsive() {
   const [repulsionForce, setRepulsionForce] = useState(100);
   const [repulsionRadius, setRepulsionRadius] = useState(150);
   const [enableTrails, setEnableTrails] = useState(false);
+  const [useNoise, setUseNoise] = useState(false);
+  const [noiseStrength, setNoiseStrength] = useState(0.3);
+  const [noiseScale, setNoiseScale] = useState(0.005);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -74,6 +77,9 @@ export default function DotRepulsive() {
     function animate() {
       if (!canvas || !ctx) return;
       
+      // Current time for noise animation
+      const currentTime = Date.now() * 0.001; // Convert to seconds
+      
       // Clear canvas with trails effect or complete clear
       if (enableTrails) {
         ctx.fillStyle = 'rgba(248, 249, 250, 0.1)';
@@ -94,6 +100,11 @@ export default function DotRepulsive() {
 
       // Update and draw dots
       dots.forEach((dot) => {
+        // Apply noise force if enabled
+        if (useNoise) {
+          dot.applyNoiseForce(noiseStrength, noiseScale, currentTime);
+        }
+        
         if (isMouseInCanvas) {
           const distanceToMouse = dot.position.distance(mousePos);
           
@@ -154,7 +165,7 @@ export default function DotRepulsive() {
         cancelAnimationFrame(animationId);
       }
     };
-  }, [showVectors, repulsionForce, repulsionRadius, enableTrails]);
+  }, [showVectors, repulsionForce, repulsionRadius, enableTrails, useNoise, noiseStrength, noiseScale]);
 
   return (
     <div style={{ padding: '2rem', maxWidth: '1000px', margin: '0 auto' }}>
@@ -193,6 +204,47 @@ export default function DotRepulsive() {
           />
           Enable Trails Effect
         </label>
+        
+        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <input
+            type="checkbox"
+            checked={useNoise}
+            onChange={(e) => setUseNoise(e.target.checked)}
+          />
+          Use Perlin Noise Movement
+        </label>
+        
+        {useNoise && (
+          <>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              Noise Strength:
+              <input
+                type="range"
+                min="1"
+                max="100"
+                step="5"
+                value={noiseStrength}
+                onChange={(e) => setNoiseStrength(parseFloat(e.target.value))}
+                style={{ width: '100px' }}
+              />
+              <span style={{ minWidth: '40px', fontSize: '0.9em' }}>{noiseStrength.toFixed(1)}</span>
+            </label>
+            
+            <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              Noise Scale:
+              <input
+                type="range"
+                min="0.01"
+                max="1.00"
+                step="0.01"
+                value={noiseScale}
+                onChange={(e) => setNoiseScale(parseFloat(e.target.value))}
+                style={{ width: '100px' }}
+              />
+              <span style={{ minWidth: '50px', fontSize: '0.9em' }}>{noiseScale.toFixed(3)}</span>
+            </label>
+          </>
+        )}
         
         <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           Repulsion Force:
@@ -247,6 +299,8 @@ export default function DotRepulsive() {
           <li><strong>Repulsive Force:</strong> Uses the <code>flee()</code> method to make dots move away from the mouse</li>
           <li><strong>Radius Control:</strong> Only dots within the repulsion radius are affected</li>
           <li><strong>Force Strength:</strong> Adjust the strength of the repulsive force</li>
+          <li><strong>Perlin Noise:</strong> Add organic, flowing movement using noise-based forces</li>
+          <li><strong>Noise Parameters:</strong> Control the strength and scale of the noise effect</li>
           <li><strong>Wrapping Boundaries:</strong> Dots wrap around screen edges for continuous motion</li>
           <li><strong>Trails Effect:</strong> Optional visual effect showing dot movement paths</li>
         </ul>

@@ -5,6 +5,7 @@ export { BezierCurve, EasingFunctions } from "./bezier.js";
 export { Shape, Circle, Rectangle, Triangle } from "./shapes.js";
 export { MotionUtil } from "./motion.js";
 export { CanvasUtil, type GridOptions, type VectorDrawOptions } from "./utils/canvas.js";
+export { PerlinNoise, perlinNoise } from "./noise.js";
 
 // Version and package info
 export const VERSION = "0.1.0";
