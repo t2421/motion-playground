@@ -98,12 +98,27 @@ export default function DotBasic() {
         dot.bounceOffBounds(canvas.width, canvas.height, 0.9);
 
         // Draw the dot
-        CanvasUtil.drawParticle(ctx, dot, {
-          showVelocity: showVectors,
-          showAcceleration: showVectors,
-          velocityScale: 0.5,
-          accelerationScale: 50
-        });
+        dot.draw(ctx);
+        
+        // Draw velocity vector if enabled
+        if (showVectors && !dot.velocity.isZero()) {
+          CanvasUtil.drawVector(ctx, dot.position, dot.velocity.multiply(0.5), {
+            color: '#4ecdc4',
+            lineWidth: 2,
+            label: 'v',
+            labelOffset: new Vector2(5, -5)
+          });
+        }
+
+        // Draw acceleration vector if enabled
+        if (showVectors && !dot.acceleration.isZero()) {
+          CanvasUtil.drawVector(ctx, dot.position, dot.acceleration.multiply(50), {
+            color: '#ff6b6b',
+            lineWidth: 2,
+            label: 'a',
+            labelOffset: new Vector2(5, 5)
+          });
+        }
         
         ctx.strokeStyle = dot.color;
         ctx.lineWidth = 1;

@@ -120,12 +120,27 @@ export default function DotRepulsive() {
         dot.wrapAroundBounds(canvas.width, canvas.height);
 
         // Draw the dot
-        CanvasUtil.drawParticle(ctx, dot, {
-          showVelocity: showVectors,
-          showAcceleration: showVectors,
-          velocityScale: 0.3,
-          accelerationScale: 20
-        });
+        dot.draw(ctx);
+        
+        // Draw velocity vector if enabled
+        if (showVectors && !dot.velocity.isZero()) {
+          CanvasUtil.drawVector(ctx, dot.position, dot.velocity.multiply(0.3), {
+            color: '#4ecdc4',
+            lineWidth: 2,
+            label: 'v',
+            labelOffset: new Vector2(5, -5)
+          });
+        }
+
+        // Draw acceleration vector if enabled
+        if (showVectors && !dot.acceleration.isZero()) {
+          CanvasUtil.drawVector(ctx, dot.position, dot.acceleration.multiply(20), {
+            color: '#ff6b6b',
+            lineWidth: 2,
+            label: 'a',
+            labelOffset: new Vector2(5, 5)
+          });
+        }
       });
 
       // Draw mouse repulsion area when mouse is in canvas
