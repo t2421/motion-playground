@@ -41,6 +41,14 @@ export const samples: Sample[] = [
     category: 'physics'
   },
   {
+    id: 'dot-multi-connect',
+    title: 'Multi-Connected Dot',
+    description: 'Single dot connected to multiple anchor points with springs',
+    thumbnail: '/thumbnails/dot-multi-connect.svg',
+    path: '/samples/dot-multi-connect',
+    category: 'physics'
+  },
+  {
     id: 'animated-shapes',
     title: 'Animated Shapes',
     description: 'Circle, Rectangle, Triangle animations',
