@@ -1,0 +1,60 @@
+<svg width="200" height="120" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="200" height="120" fill="#f8f9fa"/>
+  
+  <!-- Grid lines -->
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e9ecef" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="200" height="120" fill="url(#grid)"/>
+  
+  <!-- Mouse cursor position -->
+  <circle cx="60" cy="50" r="3" fill="#333"/>
+  
+  <!-- Distance constraint circles around mouse -->
+  <circle cx="60" cy="50" r="25" fill="none" stroke="rgba(100, 100, 100, 0.3)" stroke-width="1" stroke-dasharray="2,2"/>
+  <circle cx="60" cy="50" r="40" fill="none" stroke="rgba(100, 100, 100, 0.3)" stroke-width="1" stroke-dasharray="2,2"/>
+  
+  <!-- Dots with different colors -->
+  <circle cx="45" cy="40" r="8" fill="#45b7d1" stroke="#2c3e50" stroke-width="1"/>
+  <circle cx="80" cy="65" r="8" fill="#ffb7d1" stroke="#2c3e50" stroke-width="1"/>
+  <circle cx="100" cy="35" r="8" fill="#12ff12" stroke="#2c3e50" stroke-width="1"/>
+  
+  <!-- Connection lines from dots to mouse -->
+  <line x1="45" y1="40" x2="60" y2="50" stroke="#45b7d1" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="80" y1="65" x2="60" y2="50" stroke="#ff4444" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="100" y1="35" x2="60" y2="50" stroke="#12ff12" stroke-width="2" stroke-dasharray="5,3"/>
+  
+  <!-- Wind force arrows -->
+  <defs>
+    <marker id="windArrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto" fill="#3498db">
+      <polygon points="0 0, 8 3, 0 6" />
+    </marker>
+  </defs>
+  
+  <!-- Wind force indicators -->
+  <line x1="20" y1="20" x2="35" y2="18" stroke="#3498db" stroke-width="2" marker-end="url(#windArrow)"/>
+  <line x1="20" y1="35" x2="38" y2="32" stroke="#3498db" stroke-width="2" marker-end="url(#windArrow)"/>
+  <line x1="20" y1="50" x2="36" y2="48" stroke="#3498db" stroke-width="2" marker-end="url(#windArrow)"/>
+  <line x1="20" y1="65" x2="34" y2="63" stroke="#3498db" stroke-width="2" marker-end="url(#windArrow)"/>
+  
+  <!-- Velocity vectors from dots -->
+  <defs>
+    <marker id="velocityArrow" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto" fill="#27ae60">
+      <polygon points="0 0, 6 2, 0 4" />
+    </marker>
+  </defs>
+  
+  <line x1="45" y1="40" x2="35" y2="30" stroke="#27ae60" stroke-width="1.5" marker-end="url(#velocityArrow)"/>
+  <line x1="80" y1="65" x2="90" y2="75" stroke="#27ae60" stroke-width="1.5" marker-end="url(#velocityArrow)"/>
+  <line x1="100" y1="35" x2="110" y2="25" stroke="#27ae60" stroke-width="1.5" marker-end="url(#velocityArrow)"/>
+  
+  <!-- Wind label -->
+  <text x="15" y="15" font-family="Arial" font-size="8" fill="#3498db" font-weight="bold">WIND</text>
+  
+  <!-- Title -->
+  <text x="100" y="15" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#2c3e50">Dot Wind & Constraints</text>
+  <text x="100" y="110" text-anchor="middle" font-family="Arial" font-size="8" fill="#666">Wind forces + distance constraints</text>
+</svg>

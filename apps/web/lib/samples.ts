@@ -34,8 +34,8 @@ export const samples: Sample[] = [
   },
   {
     id: 'dot-wind',
-    title: 'Dot Wind Force',
-    description: 'Dots affected by wind forces',
+    title: 'Dot Wind & Constraints',
+    description: 'Dots affected by wind forces with distance constraints from mouse cursor',
     thumbnail: '/thumbnails/dot-wind.svg',
     path: '/samples/dot-wind',
     category: 'physics'
