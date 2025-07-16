@@ -151,23 +151,11 @@ export default function DotMultiConnect() {
         // Draw the dot
         dot.draw(ctx);
         
-        // Draw velocity vector if enabled
-        if (showVectors && !dot.velocity.isZero()) {
-          CanvasUtil.drawVector(ctx, dot.position, dot.velocity.multiply(0.5), {
-            color: '#4ecdc4',
-            lineWidth: 2,
-            label: 'v',
-            labelOffset: new Vector2(5, -5)
-          });
-        }
-
-        // Draw acceleration vector if enabled
-        if (showVectors && !dot.acceleration.isZero()) {
-          CanvasUtil.drawVector(ctx, dot.position, dot.acceleration.multiply(50), {
-            color: '#ff6b6b',
-            lineWidth: 2,
-            label: 'a',
-            labelOffset: new Vector2(5, 5)
+        // Draw debug vectors if enabled
+        if (showVectors) {
+          dot.drawDebugVectors(ctx, {
+            velocityScale: 0.5,
+            accelerationScale: 50
           });
         }
         
