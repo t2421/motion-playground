@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
-import { CanvasUtil, Vector2, Dot, ParticleEmitter } from "@t2421/motion";
+import { CanvasUtil, Vector2, Dot, ParticleEmitter, MotionUtil } from "@t2421/motion";
 
 export default function DotWalk() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -23,8 +23,8 @@ export default function DotWalk() {
       position: new Vector2(400, 250),
       velocity: Vector2.zero(),
       radius: 10,
-      color: "#45b7d1",
-      maxSpeed: 300,
+      color: "#000000",
+      maxSpeed: 50,
       friction: 0.05,
     });
 
@@ -34,8 +34,8 @@ export default function DotWalk() {
 
     const emitter = new ParticleEmitter({
       position: dot.position.clone(),
-      particleCount: 1000,
-      emissionRate: 60,
+      particleCount: 30,
+      emissionRate: 5,
       particleLifespan: 60,
       direction: Vector2.fromAngle(Math.PI),
       spread: Math.PI / 6,
@@ -43,7 +43,7 @@ export default function DotWalk() {
         min: Vector2.fromAngle(0, 30),
         max: Vector2.fromAngle(0, 80),
       },
-      colors: ["#fbbf24", "#fde047"],
+      colors: ["#cccccc", "#333333"],
       sizeRange: { min: 2, max: 4 },
       friction: 0.02,
     });
@@ -98,7 +98,9 @@ export default function DotWalk() {
 
       dot.update();
       dot.bounceOffBounds(canvas.width, canvas.height, 0.9);
-
+      const count = MotionUtil.map(dot.velocity.magnitude(),0,50,0,30)
+      console.log(count)
+      emitter.setEmissionCount(count)
       emitter.setPosition(dot.position);
       emitter.setDirection(Vector2.fromAngle(orientation + Math.PI));
       emitter.update();
