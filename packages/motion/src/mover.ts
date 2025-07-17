@@ -9,7 +9,7 @@ export class Mover {
   public position: Vector2;
   public velocity: Vector2;
   public acceleration: Vector2;
-  private prevAccelleration: Vector2; // for debug
+  public prevAccelleration: Vector2; // for debug
   public mass: number;
   public maxSpeed: number;
   public friction: number;

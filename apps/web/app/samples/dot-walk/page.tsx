@@ -98,8 +98,8 @@ export default function DotWalk() {
 
       dot.update();
       dot.bounceOffBounds(canvas.width, canvas.height, 0.9);
-      // 速度に応じてParticleの数を変更する
-      const count = MotionUtil.map(dot.velocity.magnitude(),0,50,0,30)
+      // 加速度に応じてParticleの数を変更する
+      const count = MotionUtil.map(dot.prevAccelleration.magnitude(),0,50,0,30)
       emitter.setEmissionCount(count)
       emitter.setPosition(dot.position);
       emitter.setDirection(Vector2.fromAngle(orientation + Math.PI));
