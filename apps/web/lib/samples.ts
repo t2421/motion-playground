@@ -49,6 +49,14 @@ export const samples: Sample[] = [
     category: 'physics'
   },
   {
+    id: 'particle-emitter',
+    title: 'Particle Emitter System',
+    description: 'Advanced particle system with multiple shapes and emission patterns',
+    thumbnail: '/thumbnails/particle-emitter.svg',
+    path: '/samples/particle-emitter',
+    category: 'physics'
+  },
+  {
     id: 'animated-shapes',
     title: 'Animated Shapes',
     description: 'Circle, Rectangle, Triangle animations',
