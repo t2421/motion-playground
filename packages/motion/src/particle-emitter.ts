@@ -315,6 +315,13 @@ export class ParticleEmitter {
   }
 
   /**
+   * Set emission rate (particles per second)
+   */
+  setEmissionRate(rate: number): void {
+    this.config.emissionRate = rate;
+  }
+
+  /**
    * Get number of active particles
    */
   getParticleCount(): number {
