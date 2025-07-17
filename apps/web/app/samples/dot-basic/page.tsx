@@ -104,7 +104,7 @@ export default function DotBasic() {
         if (showVectors) {
           dot.drawDebugVectors(ctx, {
             velocityScale: 0.5,
-            accelerationScale: 50
+            accelerationScale: 0.5
           });
         }
         

@@ -9,6 +9,7 @@ export class Mover {
   public position: Vector2;
   public velocity: Vector2;
   public acceleration: Vector2;
+  private prevAccelleration: Vector2; // for debug
   public mass: number;
   public maxSpeed: number;
   public friction: number;
@@ -20,6 +21,7 @@ export class Mover {
     position?: Vector2;
     velocity?: Vector2;
     acceleration?: Vector2;
+    prevAccelleration? :Vector2;
     mass?: number;
     maxSpeed?: number;
     friction?: number;
@@ -27,6 +29,7 @@ export class Mover {
     this.position = options.position || Vector2.zero();
     this.velocity = options.velocity || Vector2.zero();
     this.acceleration = options.acceleration || Vector2.zero();
+    this.prevAccelleration = options.prevAccelleration || Vector2.zero();
     this.mass = options.mass ?? 1;
     this.maxSpeed = options.maxSpeed ?? Infinity;
     this.friction = options.friction ?? 0;
@@ -48,6 +51,7 @@ export class Mover {
     }
 
     this.position = this.position.add(this.velocity.multiply(deltaTime));
+    this.prevAccelleration = this.acceleration.clone()
     this.acceleration = Vector2.zero();
   }
 
@@ -165,11 +169,11 @@ export class Mover {
     const {
       scale = 1,
       color = '#333',
-      lineWidth = 2,
+      lineWidth = 1,
       showLabel = true,
       labelOffset = new Vector2(5, -5),
       label = '',
-      arrowHeadLength = 10
+      arrowHeadLength = 3
     } = options;
 
     if (vector.isZero()) return;
@@ -219,11 +223,10 @@ export class Mover {
     this.drawVector(ctx, this.velocity, {
       scale: options.scale ?? 1,
       color: options.color ?? '#4ecdc4',
-      lineWidth: options.lineWidth ?? 2,
+      lineWidth: options.lineWidth,
       showLabel: options.showLabel ?? true,
       labelOffset: options.labelOffset ?? new Vector2(5, -5),
       label: 'v',
-      arrowHeadLength: 10
     });
   }
 
@@ -235,14 +238,13 @@ export class Mover {
     showLabel?: boolean;
     labelOffset?: Vector2;
   } = {}): void {
-    this.drawVector(ctx, this.acceleration, {
+    this.drawVector(ctx, this.prevAccelleration, {
       scale: options.scale ?? 10,
       color: options.color ?? '#ff6b6b',
-      lineWidth: options.lineWidth ?? 2,
+      lineWidth: options.lineWidth,
       showLabel: options.showLabel ?? true,
       labelOffset: options.labelOffset ?? new Vector2(5, 5),
       label: 'a',
-      arrowHeadLength: 8
     });
   }
 
