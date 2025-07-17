@@ -24,7 +24,7 @@ export default function DotWalk() {
       velocity: Vector2.zero(),
       radius: 10,
       color: "#000000",
-      maxSpeed: 50,
+      maxSpeed: 80,
       friction: 0.05,
     });
 
@@ -36,15 +36,15 @@ export default function DotWalk() {
       position: dot.position.clone(),
       particleCount: 30,
       emissionRate: 5,
-      particleLifespan: 60,
+      particleLifespan: 160,
       direction: Vector2.fromAngle(Math.PI),
       spread: Math.PI / 6,
       velocityRange: {
         min: Vector2.fromAngle(0, 30),
         max: Vector2.fromAngle(0, 80),
       },
-      colors: ["#cccccc", "#333333"],
-      sizeRange: { min: 2, max: 4 },
+      colors: ["#333333"],
+      sizeRange: { min: 2, max: 8 },
       friction: 0.02,
     });
     emitter.isActive = false;
@@ -98,8 +98,8 @@ export default function DotWalk() {
 
       dot.update();
       dot.bounceOffBounds(canvas.width, canvas.height, 0.9);
+      // 速度に応じてParticleの数を変更する
       const count = MotionUtil.map(dot.velocity.magnitude(),0,50,0,30)
-      console.log(count)
       emitter.setEmissionCount(count)
       emitter.setPosition(dot.position);
       emitter.setDirection(Vector2.fromAngle(orientation + Math.PI));
