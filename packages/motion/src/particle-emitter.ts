@@ -123,10 +123,14 @@ export class ParticleEmitter {
       
       particle.update(deltaTime);
       
-      // Reuse dead particles instead of removing them
-      if (particle.isDead) {
-        this.recycleParticle(particle);
+      if(particle.isDead){
+        if(this.config.particleCount > this.particles.length){
+          this.recycleParticle(particle);
+        }else{
+          this.particles.splice(i, 1);
+        }
       }
+     
     }
   }
 
@@ -289,7 +293,27 @@ export class ParticleEmitter {
     this.position = position.clone();
     this.config.position = position.clone();
   }
-
+  /**
+   * Set emission count and regenerate particles if needed
+   */
+  setEmissionCount(count: number): void {
+    const oldCount = this.config.particleCount;
+    this.config.particleCount = count;
+    
+    // Reset emission state when count changes
+    if (oldCount !== count) {
+      this.particlesEmitted = 0;
+      this.isActive = true;
+      
+      // For burst pattern, immediately emit all particles
+      if (this.config.pattern === EmissionPattern.BURST) {
+        this.emitBurst();
+      }
+    }
+  }
+  setEmissionRate(rate: number): void {
+    this.config.emissionRate = rate
+  }
   /**
    * Set velocity range for particles
    */
