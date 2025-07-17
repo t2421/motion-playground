@@ -75,7 +75,10 @@ export class Mover {
 
   /** Flee from a target position */
   flee(target: Vector2, maxForce: number = 0.1): void {
-    const desired = this.position.subtract(target).normalize().multiply(this.maxSpeed);
+    const difference = this.position.subtract(target);
+    const desired = difference.magnitude() === 0 
+      ? Vector2.zero() 
+      : difference.normalize().multiply(this.maxSpeed);
     const steer = desired.subtract(this.velocity).limit(maxForce);
     this.applyForce(steer);
   }
