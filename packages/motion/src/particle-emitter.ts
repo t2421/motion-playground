@@ -291,6 +291,30 @@ export class ParticleEmitter {
   }
 
   /**
+   * Set velocity range for particles
+   */
+  setVelocityRange(velocityRange: { min: Vector2; max: Vector2 }): void {
+    this.config.velocityRange = {
+      min: velocityRange.min.clone(),
+      max: velocityRange.max.clone()
+    };
+  }
+  
+  /**
+   * Set spread angle for particles (in radians)
+   */
+  setSpread(spread: number): void {
+    this.config.spread = spread;
+  }
+  
+  /**
+   * Set direction vector for particles
+   */
+  setDirection(direction: Vector2): void {
+    this.config.direction = direction.clone();
+  }
+
+  /**
    * Get number of active particles
    */
   getParticleCount(): number {
