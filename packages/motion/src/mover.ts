@@ -107,7 +107,9 @@ export class Mover {
     const distance = this.position.distance(other.position);
     if (distance > maxDistance) return;
 
-    const force = other.position.subtract(this.position).normalize();
+    let force = other.position.subtract(this.position);
+    if (force.magnitude() === 0) return; // Skip if the vector is zero
+    force = force.normalize();
     const clampedDistance = Math.max(distance, minDistance);
     const magnitude = (strength * this.mass * other.mass) / (clampedDistance * clampedDistance);
 
