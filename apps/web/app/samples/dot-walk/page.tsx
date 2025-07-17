@@ -22,7 +22,7 @@ export default function DotWalk() {
     const dot = new Dot({
       position: new Vector2(400, 250),
       velocity: Vector2.zero(),
-      radius: 10,
+      radius: 20,
       color: "#000000",
       maxSpeed: 80,
       friction: 0.05,
@@ -36,15 +36,15 @@ export default function DotWalk() {
       position: dot.position.clone(),
       particleCount: 30,
       emissionRate: 5,
-      particleLifespan: 160,
+      particleLifespan: 60,
       direction: Vector2.fromAngle(Math.PI),
-      spread: Math.PI / 6,
+      spread: Math.PI / 3,
       velocityRange: {
         min: Vector2.fromAngle(0, 30),
         max: Vector2.fromAngle(0, 80),
       },
       colors: ["#333333"],
-      sizeRange: { min: 2, max: 8 },
+      sizeRange: { min: 2, max: 10 },
       friction: 0.02,
     });
     emitter.isActive = false;
