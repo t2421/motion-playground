@@ -17,6 +17,7 @@ export default function ParticleEmitterSample() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [particleShape, setParticleShape] = useState<'dot' | 'square' | 'triangle' | 'star'>('dot');
   const [particleCount, setParticleCount] = useState(30);
+  const [emissionRate, setEmissionRate] = useState(5);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -124,7 +125,7 @@ export default function ParticleEmitterSample() {
       mouseEmitter = new ParticleEmitter({
         position: mousePos,
         particleCount: 60, // より多くのパーティクルを生成
-        emissionRate: 5, // 発生率を上げる
+        emissionRate,
         pattern: EmissionPattern.CONTINUOUS,
         particleClass: particleClasses[particleShape],
         velocityRange: {
@@ -170,6 +171,7 @@ export default function ParticleEmitterSample() {
 
       // Update and draw mouse emitter
       if (mouseEmitter && isMouseDown) {
+        mouseEmitter.setEmissionRate(emissionRate);
         mouseEmitter.update();
         mouseEmitter.draw(ctx);
       }
@@ -283,7 +285,7 @@ export default function ParticleEmitterSample() {
         cancelAnimationFrame(animationId);
       }
     };
-  }, [particleShape, particleCount]);
+  }, [particleShape, particleCount, emissionRate]);
 
   return (
     <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
@@ -333,6 +335,20 @@ export default function ParticleEmitterSample() {
             max="50"
             value={particleCount}
             onChange={(e) => setParticleCount(Number(e.target.value))}
+            style={{ width: '150px' }}
+          />
+        </div>
+
+        <div>
+          <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 'bold' }}>
+            Emission Rate: {emissionRate}
+          </label>
+          <input
+            type="range"
+            min="1"
+            max="20"
+            value={emissionRate}
+            onChange={(e) => setEmissionRate(Number(e.target.value))}
             style={{ width: '150px' }}
           />
         </div>
