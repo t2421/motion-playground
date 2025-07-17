@@ -305,11 +305,6 @@ export class ParticleEmitter {
       this.particlesEmitted = 0;
       this.isActive = true;
       
-      // Clear existing particles if we're reducing the count
-      if (count < this.particles.length) {
-        this.particles = this.particles.slice(0, count);
-      }
-      
       // For burst pattern, immediately emit all particles
       if (this.config.pattern === EmissionPattern.BURST) {
         this.emitBurst();
