@@ -150,12 +150,15 @@ export default function DotWind() {
         dot.bounceOffBounds(canvas.width, canvas.height, 0.9);
         
         // Draw the dot
-        CanvasUtil.drawParticle(ctx, dot, {
-          showVelocity: showVectors,
-          showAcceleration: showVectors,
-          velocityScale: 0.5,
-          accelerationScale: 50
-        });
+        dot.draw(ctx);
+        
+        // Draw debug vectors if enabled
+        if (showVectors) {
+          dot.drawDebugVectors(ctx, {
+            velocityScale: 0.5,
+            accelerationScale: 50
+          });
+        }
         
         // Draw connector constraint visualization
         const currentDistance = dot.position.distance(mousePos);

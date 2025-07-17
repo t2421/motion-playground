@@ -1,5 +1,6 @@
 // Export all modules
 export { Vector2 } from "./vector.js";
+export { Mover } from "./mover.js";
 export { Dot } from "./dot.js";
 export { BezierCurve, EasingFunctions } from "./bezier.js";
 export { Shape, Circle, Rectangle, Triangle } from "./shapes.js";
