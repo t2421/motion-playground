@@ -89,6 +89,14 @@ export const samples: Sample[] = [
     category: 'utils'
   },
   {
+    id: 'camera-basics',
+    title: 'Camera 2D',
+    description: 'Pan, zoom and rotate a scene with keyboard controls',
+    thumbnail: '/thumbnails/camera-basics.svg',
+    path: '/samples/camera-basics',
+    category: 'utils'
+  },
+  {
     id: 'vector-dot-product',
     title: 'Vector Dot Product',
     description: 'Interactive dot product visualization and projection',
